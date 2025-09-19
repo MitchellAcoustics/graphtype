@@ -2,7 +2,7 @@
 
 import inspect
 from functools import wraps
-from typing import Generic, NewType, _tp_cache, _TypingEmpty, get_type_hints
+from typing import Generic, NewType, _tp_cache, _TypingEmpty, get_type_hints # FIX: _TypingEmpty removed from typing in py 3.11
 
 import networkx as nx
 import numpy as np
