@@ -1,7 +1,6 @@
 from typing import List, NewType
 
 import networkx as nx
-import pandas as pd
 import pytest
 
 from graphtype import Graph, GraphData, validate

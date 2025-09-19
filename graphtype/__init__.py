@@ -2,7 +2,13 @@
 
 import inspect
 from functools import wraps
-from typing import Generic, NewType, _tp_cache, _TypingEmpty, get_type_hints
+from typing import (
+    Generic,
+    NewType,
+    _tp_cache,
+    _TypingEmpty,
+    get_type_hints,
+)  # FIX: _TypingEmpty removed from typing in py 3.11
 
 import networkx as nx
 import numpy as np
@@ -25,7 +31,6 @@ def validate(f):
         for argument_name, value in bound.arguments.items():
             hint = hints[argument_name]
             if argument_name in hints and isinstance(hint, DatasetMeta):
-
                 if not isinstance(value, nx.Graph):
                     raise TypeError(f"{value} is not a nx.Graph")
 
@@ -229,7 +234,7 @@ class Graph(nx.Graph, extra=Generic, metaclass=DatasetMeta):
     def __new__(cls, *args, **kwds):
         if not hasattr(cls, "_gorg") or cls._gorg is Graph:
             raise TypeError(
-                "Type Dataset cannot be instantiated; " "use nx.Graph() instead"
+                "Type Dataset cannot be instantiated; use nx.Graph() instead"
             )
         return _generic_new(nx.Graph, cls, *args, **kwds)
 
@@ -243,7 +248,7 @@ class NodeData(dict, extra=Generic, metaclass=DataMeta):
     def __new__(cls, *args, **kwds):
         if not hasattr(cls, "_gorg") or cls._gorg is NodeData:
             raise TypeError(
-                "Type Dataset cannot be instantiated; " "use nx.Graph() instead"
+                "Type Dataset cannot be instantiated; use nx.Graph() instead"
             )
         return _generic_new(dict, cls, *args, **kwds)
 
@@ -257,7 +262,7 @@ class GraphData(dict, extra=Generic, metaclass=DataMeta):
     def __new__(cls, *args, **kwds):
         if not hasattr(cls, "_gorg") or cls._gorg is GraphData:
             raise TypeError(
-                "Type Dataset cannot be instantiated; " "use nx.Graph() instead"
+                "Type Dataset cannot be instantiated; use nx.Graph() instead"
             )
         return _generic_new(dict, cls, *args, **kwds)
 
@@ -271,6 +276,6 @@ class EdgeData(dict, extra=Generic, metaclass=DataMeta):
     def __new__(cls, *args, **kwds):
         if not hasattr(cls, "_gorg") or cls._gorg is EdgeData:
             raise TypeError(
-                "Type Dataset cannot be instantiated; " "use nx.Graph() instead"
+                "Type Dataset cannot be instantiated; use nx.Graph() instead"
             )
         return _generic_new(dict, cls, *args, **kwds)
